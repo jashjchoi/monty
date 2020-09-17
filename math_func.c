@@ -8,6 +8,7 @@
 void _add(stack_t **stack, unsigned int line_number)
 {
 	int sum;
+	stack_t *temp;
 
 	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
@@ -16,12 +17,12 @@ void _add(stack_t **stack, unsigned int line_number)
 		_free(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
-	sum = global_var.temp;
-	_pop(stack, line_number);
-	sum += global_var.temp;
-	_pop(stack, line_number);
-	global_var.temp = sum;
-	_push(stack, line_number);
+	temp = *stack;
+
+	sum = temp->n + temp->next->n;
+	temp->next->n = sum;
+	*stack = temp->next;
+	free(temp);
 }
 /**
 * _sub - subtracts the top element of the stack from the second top element
