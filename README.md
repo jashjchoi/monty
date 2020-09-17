@@ -13,7 +13,7 @@
 | File              | Description                                                                                                             |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------|
 | bytecodes         | contains test files                                                                                                     |  
-| `monty.c`         | the main function                                                                                                       |
+| `monty_main.c`    | the main function                                                                                                       |
 | `execute_monty.c` | includes functions to split the input command into tokens and check if the input command is the one of builtin opcodes. |
 | `monty.h`         | contains the list of prototypes, libraries and variables.                                                               |
 | `helper_func.c`   | handles functionality of freeing the global variables and checking the command is a digit number.                       |
