@@ -8,7 +8,6 @@
 void _free(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = NULL;
-	(void) line_number;
 	if (stack == NULL || *stack == NULL)
 	{
 		return;
@@ -18,6 +17,7 @@ void _free(stack_t **stack, unsigned int line_number)
 		temp = (*stack)->next;
 		free(*stack);
 		*stack = temp;
+		_pop(stack, line_number);
 	}
 }
 /**
