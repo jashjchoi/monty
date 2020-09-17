@@ -1,18 +1,42 @@
 #include "monty.h"
 /**
-* g_free - frees global variable
-* Return: void
+* free_stk - frees global variable
+* @stack: the stack.
+* @line_number: the line number.
+* Return: none
 */
-void g_free(void)
+void free_stk(stack_t **stack, unsigned int line_number)
 {
-	stack_t *to_free;
-	stack_t *temp = NULL;
-
-	to_free = *global_ptr;
-	while (to_free)
+	if (stack == NULL)
+		return;
+	while (*stack != NULL)
+    {
+		_pop(stack, line_number);
+    }
+}
+/**
+* is_number - checks if the input string is a digit number
+* @token: the string being checked
+* Return: 1 if it's a digit, 0 if else
+*/
+int is_number(char *token)
+{
+	if (token == NULL)
+    {
+		return (0);
+    }
+	if (*token == '-')
+    {
+		token++;
+    }
+	while (*token != '\0')
 	{
-		temp = to_free->next;
-		free(to_free);
-		to_free = temp;
+		if (!isdigit(*token))
+        {
+			return (0);
+        }
+		token++;
 	}
+	token++;
+	return (1);
 }

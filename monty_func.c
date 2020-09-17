@@ -5,47 +5,46 @@
  * @stack: double pointer to top of the stack
  * Return: none
  */
-void tokenizer(char *file, stack_t **stack)
+void tokenizer(char *input, stack_t **stack, unsigned int line_number)
 {
-	size_t len;
-	ssize_t tokenizer;
-	unsigned int num = 0;
-	char *line = NULL;
-	char *cmd;
-	FILE *fd;
+	char *token;
+	char *tokens;
 
-	fd = fopen(file, "r");
-	if (!fd)
+	token = strtok(input, " ");
+	if (token == NULL || *token == ' ' || *token == '\n' || *token == '#')
 	{
-		printf("Error: Can't open file %s\n", file);
-		exit(EXIT_FAILURE);
+		return;
 	}
-	while ((tokenizer = getline(&line, &len, fd)) != -1)
+	if (strcmp(token, "push") == 0)
 	{
-		cmd = strtok(line, DELIMS);
-		num++;
-		if (cmd)
+		tokens = token;
+		token = strtok(NULL, " ");
+		if (!is_number(token))
 		{
-			check_cmd(stack, cmd, num);
+			line_number++;
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			free_stk(stack, line_number);
+			exit(EXIT_FAILURE);
 		}
+		global_var.temp = atoi(token);
+		check_cmd(tokens, stack, line_number);
 	}
-	if (line)
+	else
 	{
-		free(line);
+		check_cmd(token, stack, line_number);
 	}
-	fclose(fd);
 }
 /**
- * check_cmd - checks if the cmd is one of opcodes
- * @stack: ptr of the head of stack
- * @op: the line with instruction/command
- * @line_num: a number of the line where the command was found
- * Return: none
- */
-void check_cmd(stack_t **stack, char *op, unsigned int line_num)
+* check_cmd - finds OpCode match and then executes the OpCode.
+* @token: the line with instruction/command
+* @stack: the stack.
+* @line_number: a number of the line where the command was found
+* Return: none
+*/
+void check_cmd(char *token, stack_t **stack, unsigned int line_number)
 {
 	int i;
-	instruction_t ops[] = {
+	instruction_t op[] = {
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
@@ -53,22 +52,21 @@ void check_cmd(stack_t **stack, char *op, unsigned int line_num)
 		{"swap", _swap},
 		{"add", _add},
 		{"sub", _sub},
-		{"mul", _mul},
 		{"div", _div},
+		{"mul", _mul},
 		{"nop", _nop},
 		{NULL, NULL}
 	};
-	for (i = 0; ops[i].opcode; i++)
+    for (i = 0; op[i].opcode; i++)
 	{
-		if (strcmp(op, ops[i].opcode) == 0)
+		if (strcmp(token, op[i].opcode) == 0)
 		{
-			ops[i].f(stack, line_num);
+			op[i].f(stack, line_number);
 			return;
 		}
 	}
-	if (strlen(op) != 0 && op[0] != '#')
-	{
-		printf("L%u: unknown instruction %s\n", line_num, op);
-		exit(EXIT_FAILURE);
-	}
+	line_number++;
+	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+	free_stk(stack, line_number);
+	exit(EXIT_FAILURE);
 }

@@ -8,19 +8,20 @@
 void _add(stack_t **stack, unsigned int line_number)
 {
 	int sum;
-	stack_t *temp;
 
-	if (!stack || !(*stack) || !(*stack)->next)
+	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
-		printf("L%u: can't add, stack too short\n", line_number);
+		line_number++;
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		free_stk(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
-	temp = *stack;
-	sum = temp->n + temp->next->n;
-	temp->next->n = sum;
-
-	*stack = temp->next;
-	free(temp);
+	sum = global_var.temp;
+	_pop(stack, line_number);
+	sum += global_var.temp;
+	_pop(stack, line_number);
+	global_var.temp = sum;
+	_push(stack, line_number);
 }
 /**
 * _sub - subtracts the top element of the stack from the second top element
@@ -30,23 +31,23 @@ void _add(stack_t **stack, unsigned int line_number)
 */
 void _sub(stack_t **stack, unsigned int line_number)
 {
-	int sub_result;
-	stack_t *temp;
+	int sub_diff;
 
-	if (!stack || !(*stack) || !(*stack)->next)
+	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
-		printf("L%u: can't sub, stack too short\n", line_number);
+		line_number++;
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+		free_stk(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
-	temp = *stack;
 
-	sub_result = temp->next->n - temp->n;
-	temp->next->n = sub_result;
-
-	*stack = temp->next;
-	free(temp);
+	sub_diff = global_var.temp;
+	_pop(stack, line_number);
+	sub_diff = global_var.temp - sub_diff;
+	_pop(stack, line_number);
+	global_var.temp = sub_diff;
+	_push(stack, line_number);
 }
-
 /**
 * _mul - multiplies the second top element of the stack with the top element
 * @stack: double ptr to the head of the stack
@@ -56,21 +57,21 @@ void _sub(stack_t **stack, unsigned int line_number)
 void _mul(stack_t **stack, unsigned int line_number)
 {
 	int mul_product;
-	stack_t *temp;
 
-	if (!stack || !(*stack) || !(*stack)->next)
+	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
-		printf("L%u: can't mul, stack too short\n", line_number);
+		line_number++;
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_number);
+		free_stk(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	temp = *stack;
-
-	mul_product = temp->next->n * temp->n;
-	temp->next->n = mul_product;
-
-	*stack = temp->next;
-	free(temp);
+	mul_product = global_var.temp;
+	_pop(stack, line_number);
+	mul_product = global_var.temp * mul_product;
+	_pop(stack, line_number);
+	global_var.temp = mul_product;
+	_push(stack, line_number);
 }
 /**
 * _div - divides the second top element of the stack by the top element
@@ -80,25 +81,28 @@ void _mul(stack_t **stack, unsigned int line_number)
 */
 void _div(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp;
 	int div_result;
+	stack_t *temp;
 
-	if (!stack || !(*stack) || !(*stack)->next)
+	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
-		printf("L%u: can't div, stack too short\n", line_number);
+		line_number++;
+		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		free_stk(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	temp = *stack;
 	if (temp->n == 0)
 	{
-		printf("L%u: division by zero\n", line_number);
+		line_number++;
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		free_stk(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	div_result = temp->next->n / temp->n;
 	temp->next->n = div_result;
-
-	*stack = temp->next;
-	free(temp);
+	_pop(stack, line_number);
+	(*stack)->n = div_result;
 }
 /**
 * _nop - do nothing
@@ -110,4 +114,5 @@ void _nop(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
 	(void) stack;
+	;
 }
