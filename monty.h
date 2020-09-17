@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #define DELIM " \n"
-
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -36,16 +35,12 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 /**
- * struct var - temporarily variable and checker
- * @temp: temporarily variable
- * @check: check variable
- *
- * Description: store temp variable an check
- */
+* struct var - struct for setup the temp global variable
+* @temp: temp variable
+*/
 typedef struct var
 {
 	int temp;
-	char check;
 } var_t;
 
 /* Global OPcode variable */
