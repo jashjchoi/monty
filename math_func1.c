@@ -33,6 +33,7 @@ void _add(stack_t **stack, unsigned int line_number)
 void _sub(stack_t **stack, unsigned int line_number)
 {
 	int sub_diff;
+	stack_t *temp;
 
 	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
@@ -42,12 +43,11 @@ void _sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	sub_diff = global_var.temp;
-	_pop(stack, line_number);
-	sub_diff = global_var.temp - sub_diff;
-	_pop(stack, line_number);
-	global_var.temp = sub_diff;
-	_push(stack, line_number);
+	temp = *stack;
+	sub_diff = temp->next->n - temp->n;
+	temp->next->n = sub_diff;
+	*stack = temp->next;
+	free(temp);
 }
 /**
 * _mul - multiplies the second top element of the stack with the top element
@@ -58,6 +58,7 @@ void _sub(stack_t **stack, unsigned int line_number)
 void _mul(stack_t **stack, unsigned int line_number)
 {
 	int mul_product;
+	stack_t *temp;
 
 	if (!stack || !(*stack) || (*stack)->next == NULL)
 	{
@@ -67,12 +68,12 @@ void _mul(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	mul_product = global_var.temp;
-	_pop(stack, line_number);
-	mul_product = global_var.temp * mul_product;
-	_pop(stack, line_number);
-	global_var.temp = mul_product;
-	_push(stack, line_number);
+	temp = *stack;
+
+	mul_product = temp->next->n * temp->n;
+	temp->next->n = mul_product;
+	*stack = temp->next;
+	free(temp);
 }
 /**
 * _div - divides the second top element of the stack by the top element
