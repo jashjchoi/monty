@@ -42,3 +42,15 @@ int is_number(char *token)
 	token++;
 	return (1);
 }
+/**
+* _nop - do nothing
+* @stack: double pointer to the head of the stack
+* @line_number: line number in file
+* Return: none
+*/
+void _nop(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+	(void)stack;
+	;
+}
