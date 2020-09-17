@@ -7,13 +7,17 @@
 */
 void _free(stack_t **stack, unsigned int line_number)
 {
-	if (stack == NULL)
+	stack_t *temp = NULL;
+	(void) line_number;
+	if (stack == NULL || *stack == NULL)
 	{
 		return;
 	}
 	while (*stack != NULL)
 	{
-		_pop(stack, line_number);
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
 	}
 }
 /**
