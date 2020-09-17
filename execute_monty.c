@@ -9,7 +9,7 @@
 void token_cmd(char *input, stack_t **stack, unsigned int line_number)
 {
 	char *token;
-	char *tokens;
+	char *toks;
 
 	token = strtok(input, " ");
 	if (!token || *token == ' ' || *token == '\n' || *token == '#')
@@ -18,7 +18,7 @@ void token_cmd(char *input, stack_t **stack, unsigned int line_number)
 	}
 	if (strcmp(token, "push") == 0)
 	{
-		tokens = token;
+		toks = token;
 		token = strtok(NULL, " ");
 		if (!is_number(token))
 		{
@@ -28,7 +28,7 @@ void token_cmd(char *input, stack_t **stack, unsigned int line_number)
 			exit(EXIT_FAILURE);
 		}
 		global_var.temp = atoi(token);
-		check_cmd(tokens, stack, line_number);
+		check_cmd(toks, stack, line_number);
 	}
 	else
 	{
