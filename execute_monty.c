@@ -24,7 +24,7 @@ void token_cmd(char *input, stack_t **stack, unsigned int line_number)
 		{
 			line_number++;
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			_free(stack, line_number);
+			_free(stack);
 			exit(EXIT_FAILURE);
 		}
 		global_var.temp = atoi(token);
@@ -68,6 +68,6 @@ void check_cmd(char *token, stack_t **stack, unsigned int line_number)
 	}
 	line_number++;
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-	_free(stack, line_number);
+	_free(stack);
 	exit(EXIT_FAILURE);
 }

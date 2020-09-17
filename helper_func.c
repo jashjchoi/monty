@@ -5,7 +5,7 @@
 * @line_number: the line number in file
 * Return: none
 */
-void _free(stack_t **stack, unsigned int line_number)
+void _free(stack_t **stack)
 {
 	stack_t *temp = NULL;
 	if (stack == NULL || *stack == NULL)
@@ -17,7 +17,6 @@ void _free(stack_t **stack, unsigned int line_number)
 		temp = (*stack)->next;
 		free(*stack);
 		*stack = temp;
-		_pop(stack, line_number);
 	}
 }
 /**

@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	free(buff);
 	if (stack != NULL)
 	{
-		_free(&stack, line_number);
+		_free(&stack);
 	}
 	return (EXIT_SUCCESS);
 }
