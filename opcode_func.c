@@ -1,8 +1,8 @@
 #include "monty.h"
 /**
 * _push -  pushes new node to the stack
-* @stack: the top of stack
-* @line_number: the token line number
+* @stack: double ptr to the head of the stack
+* @line_number: line number in file
 * Return: none
 */
 void _push(stack_t **stack, unsigned int line_number)
@@ -34,7 +34,7 @@ void _push(stack_t **stack, unsigned int line_number)
 }
 /**
 * _pall - prints everything on stack
-* @stack: beginning of stack
+* @stack: double ptr to the head of the stack
 * @line_number: line number in file
 * Return: none
 */
@@ -51,11 +51,11 @@ void _pall(stack_t **stack, unsigned int line_number)
 	}
 }
 /**
- * _pint - prints the top of the stack
- * @stack: stack
- * @line_number: line number
- * Return: none
- */
+* _pint - prints the top of the stack
+* @stack: double ptr to the head of the stack
+* @line_number: line number in file
+* Return: none
+*/
 void _pint(stack_t **stack, unsigned int line_number)
 {
 	if (stack == NULL || *stack == NULL)
@@ -65,16 +65,16 @@ void _pint(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	else
-    {
+	{
 		fprintf(stdout, "%d\n", (*stack)->n);
-    }
+	}
 }
 
 /**
 * _pop - removes the element from the stack
 * @stack: double ptr to the head of the stack
 * @line_number: line number in file
-* Return: void
+* Return: none
 */
 void _pop(stack_t **stack, unsigned int line_number)
 {
