@@ -2,12 +2,12 @@
 /**
 * _free - frees global variable
 * @stack: double ptr to the head of stack
-* @line_number: the line number in file
 * Return: none
 */
 void _free(stack_t **stack)
 {
 	stack_t *temp = NULL;
+
 	if (stack == NULL || *stack == NULL)
 	{
 		return;
