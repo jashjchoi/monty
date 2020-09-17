@@ -34,11 +34,11 @@ int main(int argc, char *argv[])
 		token_cmd(input_cmd, &stack, line_number);
 		line_number++;
 	}
-	if (stack != NULL)
-	{
-		_free(&stack, line_number);
-	}
 	fclose(file);
 	free(buff);
+	if (stack != NULL)
+	{
+		_free(&stack, line_number)
+	}
 	return (EXIT_SUCCESS);
 }
