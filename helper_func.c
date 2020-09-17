@@ -1,6 +1,6 @@
 #include "monty.h"
 /**
-* free_stk - frees global variable
+* _free - frees global variable
 * @stack: double ptr to the head of stack
 * @line_number: the line number in file
 * Return: none
