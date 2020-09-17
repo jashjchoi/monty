@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-
 #define DELIM " \n"
 
 /**
@@ -54,11 +53,11 @@ extern var_t global_var;
 var_t global_var;
 
 /* Monty Interpreter functions */
-void tokenizer(char *line, stack_t **stack, unsigned int line_number);
+void token_cmd(char *line, stack_t **stack, unsigned int line_number);
 void check_cmd(char *token, stack_t **stack, unsigned int line_number);
 
 /* helper functions */
-void free_stk(stack_t **stack, unsigned int line_number);
+void _free(stack_t **stack, unsigned int line_number);
 int is_number(char *token);
 
 /* Stack manipulation functions */

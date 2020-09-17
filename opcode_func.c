@@ -19,7 +19,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free_stk(stack, line_number);
+		_free(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = global_var.temp;
@@ -111,7 +111,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 	{
 		line_number++;
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		free_stk(stack, line_number);
+		_free(stack, line_number);
 		exit(EXIT_FAILURE);
 	}
 	temp = (*stack)->n;

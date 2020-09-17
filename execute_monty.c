@@ -1,18 +1,18 @@
 #include "monty.h"
 /**
-* tokenizer - parses the cmd from input line
-* @input: the name of the file
+* token_cmd - parses the cmd from input line
+* @input: input filename
 * @stack: double ptr to the head of stack
 * @line_number: line number in file
 * Return: none
 */
-void tokenizer(char *input, stack_t **stack, unsigned int line_number)
+void token_cmd(char *input, stack_t **stack, unsigned int line_number)
 {
 	char *token;
 	char *tokens;
 
 	token = strtok(input, " ");
-	if (token == NULL || *token == ' ' || *token == '\n' || *token == '#')
+	if (!token || *token == ' ' || *token == '\n' || *token == '#')
 	{
 		return;
 	}
@@ -24,7 +24,7 @@ void tokenizer(char *input, stack_t **stack, unsigned int line_number)
 		{
 			line_number++;
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			free_stk(stack, line_number);
+			_free(stack, line_number);
 			exit(EXIT_FAILURE);
 		}
 		global_var.temp = atoi(token);
@@ -68,6 +68,6 @@ void check_cmd(char *token, stack_t **stack, unsigned int line_number)
 	}
 	line_number++;
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-	free_stk(stack, line_number);
+	_free(stack, line_number);
 	exit(EXIT_FAILURE);
 }
