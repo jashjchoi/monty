@@ -103,8 +103,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	}
 	div_result = temp->next->n / temp->n;
 	temp->next->n = div_result;
-	_pop(stack, line_number);
-	(*stack)->n = div_result;
+	*stack = temp->next;
 	free(temp);
 }
 /**
@@ -135,7 +134,6 @@ void mod(stack_t **stack, unsigned int line_number)
 	}
 	mod_result = temp->next->n % temp->n;
 	temp->next->n = mod_result;
-	_pop(stack, line_number);
-	(*stack)->n = mod_result;
+	*stack = temp-> next;
 	free(temp);
 }
