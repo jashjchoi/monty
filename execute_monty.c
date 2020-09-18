@@ -45,7 +45,7 @@ void token_cmd(char *input, stack_t **stack, unsigned int line_number)
 void check_cmd(char *token, stack_t **stack, unsigned int line_number)
 {
 	int i;
-	instruction_t op[] = {
+	instruction_t ops[] = {
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
@@ -59,16 +59,16 @@ void check_cmd(char *token, stack_t **stack, unsigned int line_number)
 		{"nop", _nop},
 		{NULL, NULL}
 	};
-	for (i = 0; op[i].opcode; i++)
+	for (i = 0; ops[i].opcode; i++)
 	{
-		if (strcmp(token, op[i].opcode) == 0)
+		if (strcmp(token, ops[i].opcode) == 0)
 		{
-			op[i].f(stack, line_number);
+			ops[i].f(stack, line_number);
 			return;
 		}
 	}
 	line_number++;
-	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, token);
 	_free(stack);
 	exit(EXIT_FAILURE);
 }
