@@ -107,7 +107,7 @@ void _div(stack_t **stack, unsigned int line_number)
 	free(temp);
 }
 /**
-* _mod - rest of the division of 2nd top element by top element of the stack
+* _mod - rest of the division of 2nd top element by top of the stack
 * @stack: double pointer to the head of the stack
 * @line_number: line number in file
 * Return: none
@@ -122,7 +122,7 @@ void _mod(stack_t **stack, unsigned int line_number)
 		line_number++;
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
 		_free(stack);
-		exit(EXIT_FAILURE);	
+		exit(EXIT_FAILURE);
 	}
 	temp = *stack;
 	if (temp->n == 0)
@@ -134,6 +134,6 @@ void _mod(stack_t **stack, unsigned int line_number)
 	}
 	mod_result = temp->next->n % temp->n;
 	temp->next->n = mod_result;
-	*stack = temp-> next;
+	*stack = temp->next;
 	free(temp);
 }
