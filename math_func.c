@@ -107,12 +107,12 @@ void _div(stack_t **stack, unsigned int line_number)
 	free(temp);
 }
 /**
-* _mod - the rest of the division of 2nd top element by the top element of the stack
+* _mod - rest of the division of 2nd top element by top element of the stack
 * @stack: double pointer to the head of the stack
 * @line_number: line number in file
 * Return: none
 */
-void mod(stack_t **stack, unsigned int line_number)
+void _mod(stack_t **stack, unsigned int line_number)
 {
 	int mod_result;
 	stack_t *temp;
