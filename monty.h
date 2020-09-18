@@ -44,8 +44,8 @@ typedef struct var
 } var_t;
 
 /* Global OPcode variable */
-extern var_t global_var;
 var_t global_var;
+extern var_t global_var;
 
 /* Monty Interpreter functions */
 void token_cmd(char *line, stack_t **stack, unsigned int line_number);
@@ -54,6 +54,7 @@ void check_cmd(char *token, stack_t **stack, unsigned int line_number);
 /* helper functions */
 void _free(stack_t **stack);
 int is_number(char *token);
+void _nop(stack_t **stack, unsigned int line_number);
 
 /* Stack manipulation functions */
 /* push function */
@@ -68,6 +69,5 @@ void _add(stack_t **stack, unsigned int line_number);
 void _sub(stack_t **stack, unsigned int line_number);
 void _mul(stack_t **stack, unsigned int line_number);
 void _div(stack_t **stack, unsigned int line_number);
-void _nop(stack_t **stack, unsigned int line_number);
 void _mod(stack_t **stack, unsigned int line_number);
 #endif /* __MONTY_H__ */
