@@ -31,11 +31,11 @@ int main(int argc, char *argv[])
 		token_cmd(input_cmd, &stack, line_number);
 		line_number++;
 	}
-	fclose(fp);
-	free(buff);
 	if (stack != NULL)
 	{
 		_free(&stack);
 	}
+	free(buff);
+	fclose(fp);
 	return (EXIT_SUCCESS);
 }
