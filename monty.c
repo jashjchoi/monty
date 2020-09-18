@@ -7,7 +7,6 @@
 */
 int main(int argc, char *argv[])
 {
-	char *filename;
 	char *buff = NULL;
 	size_t buffsize = 0;
 	char *input_cmd;
@@ -15,17 +14,15 @@ int main(int argc, char *argv[])
 	FILE *fp;
 	stack_t *stack = NULL;
 
-	filename = argv[1];
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-
-	fp = fopen(filename, "r");
+	fp = fopen(argv[1], "r");
 	if (fp == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (getline(&buff, &buffsize, fp) != -1)
