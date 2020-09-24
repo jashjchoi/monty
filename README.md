@@ -1,4 +1,4 @@
-## monty C - Stacks, Queues - LIFO, FIFO
+## Monty project
 
 ### Learning objectives
 - What do LIFO and FIFO mean 
